@@ -41,7 +41,7 @@
         android:text="注册"
         android:textSize="20sp"
         android:textColor="#FFF"
-        android:background="@drawable/btn_shape"/>
+        android:background="@drawable/list"/>
 
 
 </LinearLayout>

@@ -1,41 +1,46 @@
-/*package com.example.administrator.hellocurrencies;
+package com.example.administrator.hellocurrencies;
+
+/**
+ * Created by Administrator on 2018/7/13.
+ */
 
 import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-/**
- * Created by Administrator on 2018/7/11. */
-
-/*
 public class JSONParser {
-    static InputStream sInputStream=null;
-    static JSONObject sReturnJsonObject=null;
+    static InputStream sInputStream = null;
+    static JSONObject sReturnJsonObject = null;
     static String sRawJsonString = "";
-    public  JSONParser(){}
-    public JSONObject getJSONFromUrl(String url){
-
-        try{
-            DefaultHttpClient httpClient=new DefaultHttpClient();
-            HttpPost httpPost=new HttpPost(url);
-            HttpResponse httpResponse=httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            sInputStream = httpEntity.getContent();
-        }catch (UnsupportedEncodingException e){
-            e.printStackTrace();;
-        }catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+    public JSONParser() {}
+    public JSONObject getJSONFromUrl(String url) {
+//attempt to get response from server
+        try {
+            URL urlObj = new URL(url);
+            //得到connection对象。
+            HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
+            //设置请求方式
+            connection.setRequestMethod("GET");
+            //连接
+            connection.connect();
+            //得到响应码
+            int responseCode = connection.getResponseCode();
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                //得到响应流
+                sInputStream = connection.getInputStream();
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        //read stream into string-builder
+
+//read stream into string-builder
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     sInputStream, "iso-8859-1"), 8);
@@ -47,8 +52,7 @@ public class JSONParser {
             sInputStream.close();
             sRawJsonString = stringBuilder.toString();
         } catch (Exception e) {
-            Log.e("Error reading from Buffer: " + e.toString(),
-                    this.getClass().getSimpleName());
+            Log.e( this.getClass().getSimpleName(),"Error reading from Buffer: " + e.toString());
         }
         try {
             sReturnJsonObject = new JSONObject(sRawJsonString);
@@ -59,5 +63,3 @@ public class JSONParser {
         return sReturnJsonObject;
     }
 }
-
-*/

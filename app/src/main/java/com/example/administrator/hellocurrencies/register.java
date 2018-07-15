@@ -56,9 +56,7 @@ public class register extends AppCompatActivity {
                         user.save();
                         Toast.makeText(register.this, "注册成功", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(register.this, MainActivity.class);
-                        //传递用户名到下一活动，用于显示
-                        intent.putExtra("userName",newname);
+                        Intent intent = new Intent(register.this, login.class);
                         startActivity(intent);
                     }
 

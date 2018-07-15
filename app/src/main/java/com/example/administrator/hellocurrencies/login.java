@@ -46,7 +46,7 @@ public class login extends AppCompatActivity {
                 }
                 if(flag) {
                     //创建Intent对象，传入源Activity和目的Activity的类对象
-                    Intent intent = new Intent(login.this, MainActivity.class);
+                    Intent intent = new Intent(login.this, SplashActivity.class);
                     //传递用户名到下一活动，用于显示
                     String USERNAME = editText1.getText().toString();
                     intent.putExtra("userName",USERNAME);
